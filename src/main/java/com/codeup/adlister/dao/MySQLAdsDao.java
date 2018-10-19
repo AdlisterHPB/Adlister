@@ -1,6 +1,7 @@
 package com.codeup.adlister.dao;
 
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.User;
 import com.mysql.jdbc.Driver;
 
 import java.io.FileInputStream;
@@ -9,6 +10,7 @@ import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class MySQLAdsDao implements Ads {
     private Connection connection = null;
@@ -63,6 +65,19 @@ public class MySQLAdsDao implements Ads {
             rs.getString("description")
         );
     }
+    public List<Ad> getAllAdsByUser(Long userId ){
+        String query = "SELECT * FROM ads WHERE id =  ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1,userId);
+            ResultSet rs = stmt.executeQuery();
+            return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding ads", e);
+        }
+    }
+
+
     public List<Ad> findAds(String title) {
         String query = "SELECT * FROM ads WHERE title LIKE ?";
         String searchWithWildcards = "%" + title + "%";
