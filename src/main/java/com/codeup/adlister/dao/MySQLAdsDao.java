@@ -63,15 +63,16 @@ public class MySQLAdsDao implements Ads {
             rs.getString("description")
         );
     }
-    private List<Ad> findAds(String title) {
+    public List<Ad> findAds(String title) {
         String query = "SELECT * FROM ads WHERE title LIKE ?";
         String searchWithWildcards = "%" + title + "%";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setString(1, searchWithWildcards);
-            return extractAd(stmt.executeQuery());
+            ResultSet rs = stmt.executeQuery();
+            return createAdsFromResults(rs);
         } catch (SQLException e) {
-            throw new RuntimeException("Error finding a user by username", e);
+            throw new RuntimeException("Error finding ads", e);
         }
     }
 
