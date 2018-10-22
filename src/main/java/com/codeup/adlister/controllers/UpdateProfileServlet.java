@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
+import java.io.PrintWriter;
 
 
 @WebServlet(name = "controllers.UpdateProfileServlet", urlPatterns = "/updateProfile")
@@ -39,7 +39,7 @@ public class UpdateProfileServlet extends HttpServlet {
             response.getWriter().println("<script type='text/javascript'>alert('Username field Cannot be empty');location='updateProfile'</script>");
 
         }
-        if(!passwordConfirmed){
+        if(!validOldPass && !oldPassword.isEmpty()){
             response.getWriter().println("<script type='text/javascript'>alert('Old password is incorrect');location='updateProfile'</script>");
 
         }
