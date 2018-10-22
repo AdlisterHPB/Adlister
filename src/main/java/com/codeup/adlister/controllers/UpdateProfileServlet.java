@@ -31,6 +31,9 @@ public class UpdateProfileServlet extends HttpServlet {
         String confirmNewPassword = request.getParameter("confirmNewPassword");
         Boolean validOldPass = BCrypt.checkpw(oldPassword,user.getPassword());
         Boolean passwordConfirmed = newPassword.equals(confirmNewPassword);
+        PrintWriter out = response.getWriter();
+        User findUsername = DaoFactory.getUsersDao().findByUsername(username);
+        User findEmail = DaoFactory.getUsersDao().findByEmail(email);
         if(email.isEmpty()){
             response.getWriter().println("<script type='text/javascript'>alert('Email field cannot be empty');location='updateProfile';</script>");
 
@@ -42,6 +45,20 @@ public class UpdateProfileServlet extends HttpServlet {
         if(!validOldPass && !oldPassword.isEmpty()){
             response.getWriter().println("<script type='text/javascript'>alert('Old password is incorrect');location='updateProfile'</script>");
 
+        }
+
+        if (findUsername != null && user != findUsername) {
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('Username already exists!');");
+            out.println("location='updateProfile';");
+            out.println("</script>");
+
+        }
+        if (findEmail != null && user != findEmail) {
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('Email already exists!');");
+            out.println("location='updateProfile';");
+            out.println("</script>");
         }
         if(oldPassword.isEmpty() && newPassword.isEmpty() && confirmNewPassword.isEmpty() && !email.isEmpty() && !username.isEmpty()){
             user.setEmail(email);
