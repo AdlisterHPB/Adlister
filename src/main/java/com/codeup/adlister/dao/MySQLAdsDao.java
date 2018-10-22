@@ -66,7 +66,7 @@ public class MySQLAdsDao implements Ads {
         );
     }
     public List<Ad> getAllAdsByUser(Long userId ){
-        String query = "SELECT * FROM ads WHERE id =  ?";
+        String query = "SELECT * FROM ads WHERE user_id =  ?";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setLong(1,userId);
