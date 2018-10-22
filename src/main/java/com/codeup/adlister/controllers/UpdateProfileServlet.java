@@ -31,12 +31,33 @@ public class UpdateProfileServlet extends HttpServlet {
         String confirmNewPassword = request.getParameter("confirmNewPassword");
         Boolean validOldPass = BCrypt.checkpw(oldPassword,user.getPassword());
         Boolean passwordConfirmed = newPassword.equals(confirmNewPassword);
+        if(email.isEmpty()){
+            response.getWriter().println("<script type='text/javascript'>alert('Email field cannot be empty');location='updateProfile';</script>");
+
+        }
+        if(username.isEmpty()){
+            response.getWriter().println("<script type='text/javascript'>alert('Username field Cannot be empty');location='updateProfile'</script>");
+
+        }
+        if(!passwordConfirmed){
+            response.getWriter().println("<script type='text/javascript'>alert('Old password is incorrect');location='updateProfile'</script>");
+
+        }
+        if(oldPassword.isEmpty() && newPassword.isEmpty() && confirmNewPassword.isEmpty() && !email.isEmpty() && !username.isEmpty()){
+            user.setEmail(email);
+            user.setUsername(username);
+            DaoFactory.getUsersDao().updateUser(user);
+            response.sendRedirect("/profile");
+        }
+        if(!passwordConfirmed){
+            response.getWriter().println("<script type='text/javascript'>alert('new Password does not match confirmed Password');location='updateProfile';</script>");
+        }
         if(validOldPass && passwordConfirmed){
             user.setEmail(email);
             user.setUsername(username);
             user.setPassword(newPassword);
             DaoFactory.getUsersDao().updateUser(user);
+            response.sendRedirect("/profile");
         }
-        request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
     }
 }
