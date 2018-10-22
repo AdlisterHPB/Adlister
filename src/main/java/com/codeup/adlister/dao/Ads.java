@@ -13,4 +13,5 @@ public interface Ads {
     // find all ads that match title
     List<Ad> findAds(String title);
     List<Ad> getAllAdsByUser(Long userId);
+    Ad linkIndividualAds(Long id);
 }
