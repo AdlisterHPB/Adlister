@@ -14,4 +14,5 @@ public interface Ads {
     List<Ad> findAds(String title);
     List<Ad> getAllAdsByUser(Long userId);
     Ad linkIndividualAds(Long id);
+    Ad updateAd(Ad ad);
 }
