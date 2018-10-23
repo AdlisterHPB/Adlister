@@ -20,5 +20,28 @@
     </c:forEach>
 </div>
 
+<div class="container">
+    <h1>Here Are all the ads!</h1>
+
+    <c:forEach var="joiner" items="${joiners}">
+        <div class="col-md-6">
+           <p>${joiner.getAd_id()}</p>
+            <p>${joiner.getCategory_id()}</p>
+        </div>
+    </c:forEach>
+</div>
+<div class="container">
+    <h1>Here Are all the ads!</h1>
+
+    <c:forEach var="category" items="${categories}">
+        <div class="col-md-6">
+            <p>${category.category}</p>
+
+        </div>
+    </c:forEach>
+</div>
+
+
+
 </body>
 </html>

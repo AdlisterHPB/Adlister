@@ -2,6 +2,7 @@ package com.codeup.adlister.dao;
 
 import com.codeup.adlister.models.Ad;
 import com.codeup.adlister.models.Category;
+import com.codeup.adlister.models.Joiner;
 import com.codeup.adlister.models.User;
 import com.mysql.jdbc.Driver;
 
@@ -12,10 +13,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MySQLCategoriesDao implements Categories{
+public class MySQLJoinerDao implements Joiners {
     private Connection connection = null;
 
-    public MySQLCategoriesDao(Config config) {
+    public MySQLJoinerDao(Config config) {
         try {
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
@@ -27,44 +28,42 @@ public class MySQLCategoriesDao implements Categories{
             throw new RuntimeException("Error connecting to the database!", e);
         }
     }
-    public List<Category> findCategories(long id, String category) {
-        String query = "SELECT * FROM Categories JOIN Joiner as j ON j.category_id = Categories.id JOIN Ads as a ON a.id = j.ad_id WHERE a.id = ?";
-//        String searchWithWildcards = "%"+ id + category + "%";
+    public List<Joiner> findJoiners(long category_id) {
+        String query = "SELECT * FROM joiner WHERE category_id LIKE ?";
+        String searchWithWildcards = "%" + category_id + "%";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
-            stmt.setLong(1, id);
-//            stmt.setString(2, category);
+            stmt.setString(1, searchWithWildcards);
             ResultSet rs = stmt.executeQuery();
-            return createCategoryFromResults(rs);
+            return createJoinerFromResults(rs);
         } catch (SQLException e) {
-            throw new RuntimeException("Error finding category", e);
+            throw new RuntimeException("Error finding ads", e);
         }
     }
 
-
     @Override
-    public List<Category> allCategories() {
+    public List<Joiner> allJoiners() {
         PreparedStatement stmt = null;
         try {
-            stmt = connection.prepareStatement("SELECT * FROM categories");
+            stmt = connection.prepareStatement("SELECT * FROM joiner");
             ResultSet rs = stmt.executeQuery();
-            return createCategoryFromResults(rs);
+            return createJoinerFromResults(rs);
         } catch (SQLException e) {
             throw new RuntimeException("Error retrieving all category.", e);
         }
     }
-    private Category extractCategory(ResultSet rs) throws SQLException {
-        return new Category(
-                rs.getLong("id"),
-                rs.getString("Category")
+    private Joiner extractJoiner(ResultSet rs) throws SQLException {
+        return new Joiner(
+                rs.getLong("ad_id"),
+                rs.getLong("category_id")
 
         );
     }
-    private List<Category> createCategoryFromResults(ResultSet rs) throws SQLException {
-        List<Category> categories = new ArrayList<>();
+    private List<Joiner> createJoinerFromResults(ResultSet rs) throws SQLException {
+        List<Joiner> joiners = new ArrayList<>();
         while (rs.next()) {
-            categories.add(extractCategory(rs));
+            joiners.add(extractJoiner(rs));
         }
-        return categories;
+        return joiners;
     }
 }
