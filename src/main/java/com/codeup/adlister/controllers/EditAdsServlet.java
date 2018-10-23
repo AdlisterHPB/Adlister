@@ -40,7 +40,7 @@ public class EditAdsServlet extends HttpServlet {
         } else if(description.isEmpty()) {
             out.println("<script>alert('Description cannot be empty');location='/editAds?id=" + ad.getId() + "';</script>");
         } else if(ad.getUserId()!= user.getId()) {
-            out.println("<script>alert('You cannot edit an add from another user!');location='/profile'</script>");
+            out.println("<script>alert('You cannot edit an Ad from another user!');location='/profile'</script>");
         } else {
             ad.setUserId(user.getId());
             ad.setTitle(title);
