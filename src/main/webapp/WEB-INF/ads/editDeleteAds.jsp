@@ -15,7 +15,7 @@
     <form action="/editAds" method="post">
         <input type="text" name="title" value="${ad.title}"><br>
         <textarea id="description" name="description" class="form-control">${ad.description}</textarea>
-        <input type="submit" value="Update">
+        <input type="submit" value="Update"><input type="submit" value="Delete" formaction="/deleteAds" formmethod="post">
     </form>
 
 </div>

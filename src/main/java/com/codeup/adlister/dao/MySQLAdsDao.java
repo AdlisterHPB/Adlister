@@ -101,7 +101,7 @@ public class MySQLAdsDao implements Ads {
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
-            return extractAd(rs);
+            return null;
         } catch (SQLException e){
             e.printStackTrace();
             throw new RuntimeException("Error Updating Ad");
@@ -116,10 +116,10 @@ public class MySQLAdsDao implements Ads {
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
-            return extractAd(rs);
+            return null;
         } catch (SQLException e){
             e.printStackTrace();
-            throw new RuntimeException("Error Updating Ad");
+            throw new RuntimeException("Error Deleting Ad");
         }
     }
 

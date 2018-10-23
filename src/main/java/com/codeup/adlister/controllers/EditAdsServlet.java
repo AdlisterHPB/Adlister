@@ -33,17 +33,20 @@ public class EditAdsServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         if(title.isEmpty() && description.isEmpty()){
-            out.println("<script>alert('Title and Description cannot be empty')location='/editAds'</script>");
+            out.println("<script>alert('Title and Description cannot be empty');location='/editAds?id=" + ad.getId() + "';</script>");
         } else if(title.isEmpty()){
-            out.println("<script>alert('Title cannot be empty')location='/editAds'</script>");
+            out.println("<script>alert('Title cannot be empty');location='/editAds?id=" + ad.getId() + "';</script>");
 
         } else if(description.isEmpty()) {
-            out.println("<script>alert('Description cannot be empty')location='/editAds'</script>");
+            out.println("<script>alert('Description cannot be empty');location='/editAds?id=" + ad.getId() + "';</script>");
+        } else if(ad.getUserId()!= user.getId()) {
+            out.println("<script>alert('You cannot edit an add from another user!');location='/profile'</script>");
         } else {
             ad.setUserId(user.getId());
             ad.setTitle(title);
             ad.setDescription(description);
             DaoFactory.getAdsDao().updateAd(ad);
+            response.sendRedirect("/adPage?id=" + ad.getId());
         }
     }
 }
