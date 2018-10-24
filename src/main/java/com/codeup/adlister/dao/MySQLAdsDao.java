@@ -81,11 +81,12 @@ public class MySQLAdsDao implements Ads {
 
 
     public List<Ad> findAds(String title) {
-        String query = "SELECT * FROM ads WHERE title LIKE ?";
+        String query = "SELECT a.*, c.* FROM ads a left JOIN Joiner j ON a.id = j.ad_id left JOIN Categories c ON c.id = j.category_id WHERE a.title LIKE ? or c.category like ?";
         String searchWithWildcards = "%" + title + "%";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setString(1, searchWithWildcards);
+            stmt.setString(2,searchWithWildcards);
             ResultSet rs = stmt.executeQuery();
             return createAdsFromResults(rs);
         } catch (SQLException e) {
