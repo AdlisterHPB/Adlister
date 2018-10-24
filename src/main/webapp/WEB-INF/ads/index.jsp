@@ -16,9 +16,16 @@
         <div class="col-md-6">
             <h2><a href=<%="/adPage?id="%>${ad.getId()}>${ad.title}</a></h2>
             <p>${ad.description}</p>
+            <c:forEach var="category" items="${ad.getCategories()}" varStatus="i">
+                <c:out value="${category.category.concat(!i.last ? ', ': '')}" />
+            </c:forEach>
         </div>
     </c:forEach>
+
 </div>
+
+
+
 
 </body>
 </html>

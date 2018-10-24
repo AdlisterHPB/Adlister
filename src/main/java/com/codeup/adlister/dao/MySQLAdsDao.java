@@ -58,11 +58,13 @@ public class MySQLAdsDao implements Ads {
     }
 
     private Ad extractAd(ResultSet rs) throws SQLException {
+        long id = rs.getLong("id");
         return new Ad(
-            rs.getLong("id"),
+            id,
             rs.getLong("user_id"),
             rs.getString("title"),
-            rs.getString("description")
+            rs.getString("description"),
+            DaoFactory.getCategoriesDao().findCategories(id)
         );
     }
     public List<Ad> getAllAdsByUser(Long userId ){

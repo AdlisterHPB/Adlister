@@ -23,6 +23,10 @@
         <div class="col-md-6">
             <h2>${ad.title}</h2>
             <p>${ad.description}</p>
+
+            <c:forEach var="category" items="${ad.getCategories()}" varStatus="i">
+                <c:out value="${category.category.concat(!i.last ? ', ': '')}" />
+            </c:forEach>
             <c:if test="${sessionScope.user != null && sessionScope.user.id == ad.userId}">
                 <a href=<%="/editAds?id="%>${ad.id}><button>Edit</button></a>
             </c:if>
