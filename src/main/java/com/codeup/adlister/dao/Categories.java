@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface Categories {
     List<Category> allCategories();
-    List<Category> findCategories(long id, String category);
+    List<Category> findCategories(long id);
 
 }

@@ -27,8 +27,8 @@ public class MySQLCategoriesDao implements Categories{
             throw new RuntimeException("Error connecting to the database!", e);
         }
     }
-    public List<Category> findCategories(long id, String category) {
-        String query = "SELECT * FROM Categories JOIN Joiner as j ON j.category_id = Categories.id JOIN Ads as a ON a.id = j.ad_id WHERE a.id = ?";
+    public List<Category> findCategories(long id) {
+        String query = "SELECT * FROM Categories JOIN Joiner as j ON j.category_id = Categories.id JOIN Ads as a ON a.id = j.ad_id JOIN Users as u ON u.id=j.ad_id WHERE a.id = ?";
 //        String searchWithWildcards = "%"+ id + category + "%";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
