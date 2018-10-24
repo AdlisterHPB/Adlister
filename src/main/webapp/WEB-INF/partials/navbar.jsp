@@ -17,7 +17,7 @@
                     <li><a href="/ads/create">Create a Ad!</a></li>
                     <li><a href="/logout">Logout</a></li>
                     <li><a href="/updateProfile">Edit Profile</a></li>
-                    <li><a href="/profile">Edit Ads</a></li>
+                    <li><a href="/profile">Your Ads</a></li>
 
                 </c:otherwise>
             </c:choose>
