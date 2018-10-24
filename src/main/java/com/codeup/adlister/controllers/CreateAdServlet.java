@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(name = "controllers.CreateAdServlet", urlPatterns = "/ads/create")
 public class CreateAdServlet extends HttpServlet {
@@ -21,13 +22,24 @@ public class CreateAdServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         if (request.getSession().getAttribute("user") != null) {
             User user = (User) request.getSession().getAttribute("user");
-            Ad ad = new Ad(
-                    user.getId(),
-                    request.getParameter("title"),
-                    request.getParameter("description")
-            );
-            DaoFactory.getAdsDao().insert(ad);
-            response.sendRedirect("/ads");
+            String title = request.getParameter("title");
+            String description = request.getParameter("description");
+            PrintWriter out = response.getWriter();
+            if(title.isEmpty() && description.isEmpty()){
+                out.println("<script>alert('You cannot create a blank ad!');location='/ads/create'</script>");
+            } else if(title.isEmpty()){
+                out.println("<script>alert('Title cannot be blank!');location='/ads/create'</script>");
+            } else if(description.isEmpty()){
+                out.println("<script>alert('Description cannot be blank!');location='/ads/create'</script>");
+            } else {
+                Ad ad = new Ad(
+                        user.getId(),
+                        title,
+                        description
+                );
+                DaoFactory.getAdsDao().insert(ad);
+                response.sendRedirect("/ads");
+            }
         } else {
             response.sendRedirect("/login");
         }
