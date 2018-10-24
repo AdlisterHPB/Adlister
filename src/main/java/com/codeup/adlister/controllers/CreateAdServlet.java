@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -25,11 +26,18 @@ public class CreateAdServlet extends HttpServlet {
             String title = request.getParameter("title");
             String description = request.getParameter("description");
             PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
             if(title.isEmpty() && description.isEmpty()){
+                session.setAttribute("title", title);
+                session.setAttribute("description", description);
                 out.println("<script>alert('You cannot create a blank ad!');location='/ads/create'</script>");
             } else if(title.isEmpty()){
+                session.setAttribute("title", title);
+                session.setAttribute("description", description);
                 out.println("<script>alert('Title cannot be blank!');location='/ads/create'</script>");
             } else if(description.isEmpty()){
+                session.setAttribute("title", title);
+                session.setAttribute("description", description);
                 out.println("<script>alert('Description cannot be blank!');location='/ads/create'</script>");
             } else {
                 Ad ad = new Ad(
