@@ -92,6 +92,38 @@ public class MySQLAdsDao implements Ads {
             throw new RuntimeException("Error finding ads", e);
         }
     }
+    public Ad updateAd(Ad ad){
+        String query = "UPDATE ads SET user_id = ?, title = ?, description = ? WHERE id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            stmt.setLong(1,ad.getUserId());
+            stmt.setString(2,ad.getTitle());
+            stmt.setString(3,ad.getDescription());
+            stmt.setLong(4,ad.getId());
+            stmt.executeUpdate();
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next();
+            return null;
+        } catch (SQLException e){
+            e.printStackTrace();
+            throw new RuntimeException("Error Updating Ad");
+        }
+    }
+    public Ad deleteAd(Ad ad){
+        String query = "DELETE FROM ads WHERE user_id = ? AND id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            stmt.setLong(1,ad.getUserId());
+            stmt.setLong(2,ad.getId());
+            stmt.executeUpdate();
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next();
+            return null;
+        } catch (SQLException e){
+            e.printStackTrace();
+            throw new RuntimeException("Error Deleting Ad");
+        }
+    }
 
     public Ad linkIndividualAds(Long id) {
         String query = "SELECT * FROM ads WHERE id = ?";
