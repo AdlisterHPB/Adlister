@@ -41,7 +41,18 @@ public class MySQLCategoriesDao implements Categories{
         }
     }
 
-
+    public Category findCategoryByName(String category){
+        String query = "SELECT * FROM categories WHERE category = ?";
+        try{
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setString(1,category);
+            ResultSet rs = stmt.executeQuery();
+            return extractCategory(rs);
+        } catch(SQLException e){
+            e.printStackTrace();
+            throw new RuntimeException("Can't find category by name");
+        }
+    }
     @Override
     public List<Category> allCategories() {
         PreparedStatement stmt = null;
