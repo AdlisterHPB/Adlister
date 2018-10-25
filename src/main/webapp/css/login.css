@@ -1,0 +1,34 @@
+
+
+body {
+    background-image: url("../images/ricklantis2.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+h1 {
+    margin: auto;
+    color: #a3f8f7;
+    text-align: center;
+}
+
+.container {
+    height: 45%;
+    width: 45%;
+}
+
+label {
+    color: #a3f8f7;
+}
+
+#sbumitForLogin {
+    color: #ae855c;
+}
+
+.btn-custom {
+    background-color: #a3f8f7;
+}
+
+
