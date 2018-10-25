@@ -1,0 +1,34 @@
+body {
+    background-image: url("../images/rickmortygarage2.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+h1 {
+    margin: auto;
+    color: #7cfbfa;
+    text-align: center;
+}
+
+a {
+    color: #e8e769;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+h5 {
+    color: #7cfbfa;
+    text-align: center;
+
+}
+
+p {
+    color: #7cfbfa;
+    text-align: center;
+}
+
