@@ -1,0 +1,13 @@
+body {
+    background-image: url("../images/adlister-background.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+}
+
+h1 {
+    margin: auto;
+    color: #786e80;
+    text-align: center;
+}
