@@ -40,14 +40,16 @@ public class MySQLJoinerDao implements Joiners {
             throw new RuntimeException("Error finding ads", e);
         }
     }
-    public Long insert(long ad_id, long category_id){
+    public Long insert(long ad_id, Category category){
         String query = "INSERT INTO Joiner (ad_id, category_id) VALUES (?,?)";
         try{
-            PreparedStatement stmt = connection.prepareStatement(query);
+            PreparedStatement stmt = connection.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+            stmt.setLong(1,ad_id);
+            stmt.setLong(2,category.getId());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
-            return rs.getLong(1);
+            return null;
         } catch(SQLException e){
             e.printStackTrace();
             throw new RuntimeException("Error inserting into joiner");

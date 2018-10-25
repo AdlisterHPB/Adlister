@@ -10,7 +10,7 @@ import java.util.List;
 public interface Joiners {
     List<Joiner> allJoiners();
     List<Joiner> findJoiners(long joiner);
-    Long insert(long ad_id, long category_id);
+    Long insert(long ad_id, Category category);
 
 
 }

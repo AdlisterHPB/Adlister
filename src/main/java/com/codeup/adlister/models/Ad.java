@@ -23,6 +23,12 @@ public class Ad {
         this.title = title;
         this.description = description;
     }
+//    public Ad(long userId, String title, String description, List<Category> categories){
+//        this.userId = userId;
+//        this.title = title;
+//        this.description = description;
+//        this.categories = categories;
+//    }
 
     public Ad(long id, long userId, String title, String description, List<Category> categories) {
         this.id = id;
