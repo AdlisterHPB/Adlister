@@ -10,7 +10,7 @@ body {
 }
 h1 {
     margin: auto;
-    color: #a3f8f7;
+    color: #7cfbfa;
     text-align: center;
 }
 
@@ -20,15 +20,22 @@ h1 {
 }
 
 label {
-    color: #a3f8f7;
+    color: #7cfbfa;
 }
 
 #sbumitForLogin {
-    color: #ae855c;
+    color: #fff874;
+    font-size: 17px;
+    font-weight: bolder;
+    /*width: 50%;*/
+    text-align: center;
 }
 
 .btn-custom {
-    background-color: #a3f8f7;
+    background-color: #7cfbfa;
 }
+
+
+
 
 
