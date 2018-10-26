@@ -5,6 +5,7 @@
     <jsp:include page="/WEB-INF/partials/head.jsp">
         <jsp:param name="title" value="Create a new Ad" />
     </jsp:include>
+    <link rel="stylesheet" type="text/css" href="../../css/createAd.css">
 </head>
 <body>
 <c:set var="title" value="${sessionScope.title != null ? sessionScope.title : ''}" scope="session" />
