@@ -1,0 +1,24 @@
+body {
+    background: url("../images/rickandmoorty3.jpg") no-repeat center;
+    background-size: cover;
+    height: 100%;
+}
+.div-custom{
+    color: #7cfbfa;
+    text-align: center;
+    margin: 400px auto auto;
+}
+
+h2{
+    text-align: center;
+}
+p {
+    text-align: center;
+}
+a{
+    color: #7cfbfa;
+
+}
+button{
+    background-color: #222833;
+}
