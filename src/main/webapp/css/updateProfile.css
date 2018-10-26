@@ -1,0 +1,23 @@
+body {
+    background-image: url("../images/r&M9.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
+input {
+    background-color: #222833;
+    color: #7cfbfa;
+    text-align: center;
+
+
+}
+.form-custom{
+    font-size: x-large;
+    color: #7cfbfa;
+    margin: auto;
+    text-align: center;
+    margin-top: 260px;
+}
