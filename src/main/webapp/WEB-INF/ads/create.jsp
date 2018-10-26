@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/createAd.css">
 </head>
 <body>
+<jsp:include page="/WEB-INF/partials/navbar.jsp" />
 <c:set var="title" value="${sessionScope.title != null ? sessionScope.title : ''}" scope="session" />
 <c:set var="description" value="${sessionScope.description != null ? sessionScope.description : ''}" scope="session"/>
 
