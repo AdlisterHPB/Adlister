@@ -28,7 +28,7 @@ public class MySQLCategoriesDao implements Categories{
         }
     }
     public List<Category> findCategories(long id) {
-        String query = "SELECT * FROM Categories JOIN Joiner as j ON j.category_id = Categories.id JOIN Ads as a ON a.id = j.ad_id JOIN Users as u ON u.id=j.ad_id WHERE a.id = ?";
+        String query = "SELECT * FROM Categories LEFT JOIN Joiner as j ON j.category_id = Categories.id LEFT JOIN Ads as a ON a.id = j.ad_id LEFT JOIN Users as u ON u.id=j.ad_id WHERE a.id = ?";
 //        String searchWithWildcards = "%"+ id + category + "%";
         try {
             PreparedStatement stmt = connection.prepareStatement(query);
@@ -41,7 +41,19 @@ public class MySQLCategoriesDao implements Categories{
         }
     }
 
-
+    public Category findCategoryByName(String category){
+        String query = "SELECT * FROM categories WHERE category = ?";
+        try{
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setString(1,category);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            return extractCategory(rs);
+        } catch(SQLException e){
+            e.printStackTrace();
+            throw new RuntimeException("Can't find category by name");
+        }
+    }
     @Override
     public List<Category> allCategories() {
         PreparedStatement stmt = null;
@@ -56,7 +68,7 @@ public class MySQLCategoriesDao implements Categories{
     private Category extractCategory(ResultSet rs) throws SQLException {
         return new Category(
                 rs.getLong("id"),
-                rs.getString("Category")
+                rs.getString("category")
 
         );
     }

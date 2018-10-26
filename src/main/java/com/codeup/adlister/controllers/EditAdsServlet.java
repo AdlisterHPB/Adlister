@@ -2,6 +2,7 @@ package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.Category;
 import com.codeup.adlister.models.User;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -23,6 +24,7 @@ public class EditAdsServlet extends HttpServlet {
         }
         long id = Long.parseLong(request.getParameter("id"));
         request.getSession().setAttribute("ad", DaoFactory.getAdsDao().linkIndividualAds(id));
+        request.getSession().setAttribute("categories", DaoFactory.getCategoriesDao().allCategories());
         request.getRequestDispatcher("/WEB-INF/ads/editDeleteAds.jsp").forward(request, response);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -30,6 +32,9 @@ public class EditAdsServlet extends HttpServlet {
         Ad ad= (Ad) request.getSession().getAttribute("ad");
         String title = request.getParameter("title");
         String description = request.getParameter("description");
+        String category1 = request.getParameter("Category1");
+        String category2 = request.getParameter("Category2");
+        String category3 = request.getParameter("Category3");
         PrintWriter out = response.getWriter();
 
         if(title.isEmpty() && description.isEmpty()){
@@ -42,6 +47,19 @@ public class EditAdsServlet extends HttpServlet {
         } else if(ad.getUserId()!= user.getId()) {
             out.println("<script>alert('You cannot edit an Ad from another user!');location='/profile'</script>");
         } else {
+            if(category1 != null){
+                Category firstCategory = DaoFactory.getCategoriesDao().findCategoryByName(category1);
+                DaoFactory.getJoinersDao().update(ad.getId(),firstCategory,user.getId());
+            }
+            if(category2 != null){
+                Category secondCategory = DaoFactory.getCategoriesDao().findCategoryByName(category2);
+                DaoFactory.getJoinersDao().update(ad.getId(),secondCategory,user.getId());
+            }
+            if(category3 != null){
+                Category thirdCategory = DaoFactory.getCategoriesDao().findCategoryByName(category3);
+                DaoFactory.getJoinersDao().update(ad.getId(),thirdCategory,user.getId());
+            }
+            ad.setCategories(DaoFactory.getCategoriesDao().findCategories(ad.getId()));
             ad.setUserId(user.getId());
             ad.setTitle(title);
             ad.setDescription(description);

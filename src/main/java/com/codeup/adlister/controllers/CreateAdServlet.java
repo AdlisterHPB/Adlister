@@ -2,6 +2,7 @@ package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.Category;
 import com.codeup.adlister.models.User;
 
 import javax.servlet.ServletException;
@@ -12,10 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @WebServlet(name = "controllers.CreateAdServlet", urlPatterns = "/ads/create")
 public class CreateAdServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getSession().setAttribute("categories", DaoFactory.getCategoriesDao().allCategories());
         request.getRequestDispatcher("/WEB-INF/ads/create.jsp")
             .forward(request, response);
     }
@@ -25,8 +30,12 @@ public class CreateAdServlet extends HttpServlet {
             User user = (User) request.getSession().getAttribute("user");
             String title = request.getParameter("title");
             String description = request.getParameter("description");
+            String category1 = request.getParameter("Category1");
+            String category2 = request.getParameter("Category2");
+            String category3 = request.getParameter("Category3");
             PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
+
             if(title.isEmpty() && description.isEmpty()){
                 session.setAttribute("title", title);
                 session.setAttribute("description", description);
@@ -45,7 +54,21 @@ public class CreateAdServlet extends HttpServlet {
                         title,
                         description
                 );
-                DaoFactory.getAdsDao().insert(ad);
+                long newAdId = DaoFactory.getAdsDao().insert(ad);
+
+                if(category1 != null){
+                   Category firstCategory = DaoFactory.getCategoriesDao().findCategoryByName(category1);
+                   DaoFactory.getJoinersDao().insert(newAdId,firstCategory);
+                }
+                if(category2 != null){
+                    Category secondCategory = DaoFactory.getCategoriesDao().findCategoryByName(category2);
+                    DaoFactory.getJoinersDao().insert(newAdId,secondCategory);
+                }
+                if(category3 != null){
+                    Category thirdCategory = DaoFactory.getCategoriesDao().findCategoryByName(category3);
+                    DaoFactory.getJoinersDao().insert(newAdId,thirdCategory);
+                }
+                ad.setCategories(DaoFactory.getCategoriesDao().findCategories(newAdId));
                 response.sendRedirect("/ads");
             }
         } else {

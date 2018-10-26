@@ -16,6 +16,24 @@
     <form action="/editAds" method="post">
         <input type="text" name="title" value='<c:out value="${ad.title}"/>'><br>
         <textarea id="description" name="description" class="form-control"><c:out value="${ad.description}"/></textarea>
+        <select name="Category1" id="Category1" required>
+            <option value="" selected disabled hidden>Choose here</option>
+            <c:forEach var="category" items="${categories}">
+                <option value='<c:out value="${category.category}"/>'><c:out value="${category.category}"/></option>
+            </c:forEach>
+        </select>
+        <select name="Category2" id="Category2">
+            <option value="" selected disabled hidden>Choose here</option>
+            <c:forEach var="category" items="${categories}">
+                <option value='<c:out value="${category.category}"/>'><c:out value="${category.category}"/></option>
+            </c:forEach>
+        </select>
+        <select name="Category3" id="Category3">
+            <option value="" selected disabled hidden>Choose here</option>
+            <c:forEach var="category" items="${categories}">
+                <option value='<c:out value="${category.category}"/>'><c:out value="${category.category}"/></option>
+            </c:forEach>
+        </select>
         <input type="submit" value="Update"><input type="submit" value="Delete" formaction="/deleteAds" formmethod="post">
     </form>
 

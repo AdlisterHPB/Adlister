@@ -21,6 +21,24 @@
                 <label for="description">Description</label>
                 <textarea id="description" name="description" class="form-control" type="text"><c:out value="${description}" /></textarea>
             </div>
+            <select name="Category1" id="Category1" required>
+                <option value="" selected disabled hidden>Choose here</option>
+            <c:forEach var="category" items="${categories}">
+                <option value='<c:out value="${category.category}"/>'><c:out value="${category.category}"/></option>
+            </c:forEach>
+            </select>
+            <select name="Category2" id="Category2">
+                <option value="" selected disabled hidden>Choose here</option>
+                <c:forEach var="category" items="${categories}">
+                    <option value='<c:out value="${category.category}"/>'><c:out value="${category.category}"/></option>
+                </c:forEach>
+            </select>
+            <select name="Category3" id="Category3">
+                <option value="" selected disabled hidden>Choose here</option>
+                <c:forEach var="category" items="${categories}">
+                    <option value='<c:out value="${category.category}"/>'><c:out value="${category.category}"/></option>
+                </c:forEach>
+            </select>
             <input type="submit" class="btn btn-block btn-primary">
         </form>
     </div>
