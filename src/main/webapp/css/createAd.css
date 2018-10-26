@@ -1,0 +1,23 @@
+body {
+    background-image: url("../images/rickfixing.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+h1 {
+    margin: 0 auto;
+    color: #7cfbfa;
+    text-align: left;
+}
+
+.container {
+    margin-top: 100px;
+    height: 45%;
+    width: 45%;
+}
+
+label {
+    color: #7cfbfa;
+}
