@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="css/updateProfile.css">
     <jsp:include page="../WEB-INF/partials/head.jsp">
         <jsp:param name="title" value="Update Profile" />
     </jsp:include>
@@ -9,8 +10,8 @@
 <body>
 <jsp:include page="../WEB-INF/partials/navbar.jsp" />
 
-<div class="container">
-    <form action="/updateProfile" method="post">
+<div class="container div-custom">
+    <form class="form-custom" action="/updateProfile" method="post">
         <input type="email" name="email" value="${sessionScope.user.email}"><br>
         <input type="text" name="username" value="${sessionScope.user.username}"><br>
         <input type="password" name="oldPassword" placeholder="Old Password"><br>
