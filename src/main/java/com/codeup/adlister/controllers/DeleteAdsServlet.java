@@ -26,6 +26,7 @@ public class DeleteAdsServlet extends HttpServlet {
         if(ad.getUserId()!= user.getId()) {
             out.println("<script>alert('You cannot delete an add from another user!');location='/profile'</script>");
         } else {
+            DaoFactory.getJoinersDao().delete(ad.getId());
             DaoFactory.getAdsDao().deleteAd(ad);
             response.sendRedirect("/profile");
         }

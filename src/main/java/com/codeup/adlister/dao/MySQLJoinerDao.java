@@ -55,6 +55,31 @@ public class MySQLJoinerDao implements Joiners {
             throw new RuntimeException("Error inserting into joiner");
         }
     }
+    public void update(long ad_id, Category category, long user_id){
+        String query = "UPDATE joiner LEFT JOIN Ads a ON a.id = joiner.ad_id SET ad_id = ?, category_id = ? WHERE a.user_id = ? and a.id = ?";
+        try{
+            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            stmt.setLong(1,ad_id);
+            stmt.setLong(2,category.getId());
+            stmt.setLong(3,user_id);
+            stmt.setLong(4,ad_id);
+            stmt.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+            throw new RuntimeException("Error updating joiner");
+        }
+    }
+    public void delete(long ad_id){
+        String query = "DELETE FROM joiner WHERE ad_id = ?";
+        try{
+            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            stmt.setLong(1,ad_id);
+            stmt.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+            throw new RuntimeException("Error deleting from joiner");
+        }
+    }
 
 
     @Override
