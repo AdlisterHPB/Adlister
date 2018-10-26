@@ -29,7 +29,7 @@
                 <c:out value="${category.category.concat(!i.last ? ', ': '')}" />
             </c:forEach>
             <c:if test="${sessionScope.user != null && sessionScope.user.id == ad.userId}">
-                <a href=<%="/editAds?id="%>${ad.id}><button>Edit</button></a>
+             <br>   <a href=<%="/editAds?id="%>${ad.id}><button>Edit</button></a>
             </c:if>
         </div>
 
