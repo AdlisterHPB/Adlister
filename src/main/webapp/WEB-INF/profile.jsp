@@ -5,11 +5,13 @@
     <jsp:include page="../WEB-INF/partials/head.jsp">
         <jsp:param name="title" value="Your Profile" />
     </jsp:include>
+    <link rel="stylesheet" type="text/css" href="css/styleprofile.css">
+
 </head>
 <body>
     <jsp:include page="../WEB-INF/partials/navbar.jsp" />
 
-    <div class="container">
+    <div class="container div-custom">
         <h1>Welcome, ${sessionScope.user.username}!</h1>
         <hr>
             <h1>Here are all your ads!</h1>
