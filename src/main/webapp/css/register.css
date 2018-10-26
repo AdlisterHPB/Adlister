@@ -1,0 +1,50 @@
+body {
+    background-image: url("../images/rickandmortygang.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+h1 {
+    /*background:transparent;*/
+    /*background-color: lightgrey;*/
+    font-size: 30px;
+    margin: auto;
+    color: #364980;
+    text-align: center;
+    font-weight: bolder;
+    background-color: lightgrey;
+    opacity: .75;
+    margin-bottom: 5px;
+
+}
+
+
+.container {
+    margin-top: 100px;
+    height: 40%;
+    width: 40%;
+    text-align: center;
+
+}
+
+label {
+    font-size: 25px;
+    color: #364980;
+    font-weight: bolder;
+    background-color: lightgrey;
+    opacity: .75;
+}
+
+#sbumitForLogin {
+    color: #fff874;
+    font-size: 17px;
+    font-weight: bolder;
+    /*width: 50%;*/
+    text-align: center;
+}
+
+.btn-custom {
+    background-color: #364980;
+}
