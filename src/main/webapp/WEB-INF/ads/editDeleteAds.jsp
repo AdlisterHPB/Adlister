@@ -14,7 +14,7 @@
 
 
     <form action="/editAds" method="post">
-        <input type="text" name="title" value='<c:out value="${ad.title}"/>'><br>
+        <input required pattern=".*\S+.*" type="text" name="title" value='<c:out value="${ad.title}"/>'><br>
         <textarea id="description" name="description" class="form-control"><c:out value="${ad.description}"/></textarea>
         <select name="Category1" id="Category1" required>
             <option value="" selected disabled hidden>Choose here</option>

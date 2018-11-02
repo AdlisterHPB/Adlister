@@ -17,7 +17,7 @@
         <form action="/ads/create" method="post">
             <div class="form-group">
                 <label for="title">Title</label>
-                <input id="title" name="title" class="form-control" type="text" value='<c:out value="${title}" />'>
+                <input required pattern=".*\S+.*" id="title" name="title" class="form-control" type="text" value='<c:out value="${title}" />'>
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
