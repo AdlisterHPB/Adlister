@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
 
-    <link rel="stylesheet" type="text/css" href="css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="../../css/navbar.css">
 </head>
 <nav class="navbar navbar-expand-lg navbar-custom">
     <div class="container-fluid">
