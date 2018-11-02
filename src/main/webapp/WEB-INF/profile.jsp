@@ -12,13 +12,13 @@
     <jsp:include page="../WEB-INF/partials/navbar.jsp" />
 
     <div class="container div-custom">
-        <h1>Welcome, ${sessionScope.user.username}!</h1>
+        <h1>Welcome, <c:out value="${sessionScope.user.username}"/>!</h1>
         <hr>
             <h1>Here are all your ads!</h1>
 
             <c:forEach var="ad" items="${ads}">
                 <div class="col-md-6">
-                    <h2><a href=<%="/adPage?id="%>${ad.getId()}>${ad.title}</a></h2>
+                    <h2><a href=<%="/adPage?id="%>${ad.getId()}><c:out value="${ad.title}"/></a></h2>
                     <hr>
                     <p><c:out value="${ad.description}"/></p>
                     <c:forEach var="category" items="${ad.getCategories()}" varStatus="i">
