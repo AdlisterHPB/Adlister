@@ -15,7 +15,7 @@
 
     <c:forEach var="ad" items="${ads}">
         <div class="col-md-6">
-            <h2><a href=<%="/adPage?id="%>${ad.getId()}>${ad.title}</a></h2>
+            <h2><a href=<%="/adPage?id="%>${ad.getId()}><c:out value="${ad.title}"/></a></h2>
             <p><c:out value="${ad.description}"/></p>
             <h5>Categories</h5>
             <p><c:forEach var="category" items="${ad.getCategories()}" varStatus="i">

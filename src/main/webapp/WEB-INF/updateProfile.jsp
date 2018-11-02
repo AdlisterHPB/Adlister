@@ -12,8 +12,8 @@
 
 <div class="container div-custom">
     <form class="form-custom" action="/updateProfile" method="post">
-        <input type="email" name="email" value="${sessionScope.user.email}"><br>
-        <input type="text" name="username" value="${sessionScope.user.username}"><br>
+        <input type="email" name="email" value='<c:out value="${sessionScope.user.email}"/>'><br>
+        <input type="text" name="username" value='<c:out value="${sessionScope.user.username}"/>'><br>
         <input type="password" name="oldPassword" placeholder="Old Password"><br>
         <input type="password" name="newPassword" placeholder="New Password"><br>
         <input type="password" name="confirmNewPassword" placeholder="Confirm New Password"><br>
